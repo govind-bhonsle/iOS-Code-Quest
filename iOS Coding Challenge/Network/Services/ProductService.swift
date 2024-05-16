@@ -7,12 +7,12 @@
 
 import Foundation
 protocol ProductServiceable {
-    func getEmployees() async -> Result<ProductModel, RequestError>
+    func getProducts() async -> Result<ProductModel, RequestError>
 }
 
 struct ProductService: HTTPClient, ProductServiceable
 {
-    func getEmployees() async -> Result<ProductModel, RequestError> {
+    func getProducts() async -> Result<ProductModel, RequestError> {
         return await sendRequest(endpoint: ProductEndPoint.products, responseModel: ProductModel.self)
     }
 }

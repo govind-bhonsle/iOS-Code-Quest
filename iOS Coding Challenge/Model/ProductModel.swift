@@ -6,44 +6,40 @@
 //
 
 import Foundation
+
 struct ProductModel: Codable {
-    let data: [Product]
+    let products: [Product]
+    
+    enum CodingKeys: String, CodingKey {
+        case products = "data"
+    }
 }
+
 struct Product: Codable, Identifiable {
     var id = UUID().uuidString
     let itemID, value, currency, title: String
-    let description: Description
+    let description: LocalizedDescription
     
     var currencySymbol: String {
         return currencySymbol(for: currency) ?? ""
     }
     
-    var itemTitle : String
-    {
-        switch deviceLanguage {
-        case "fr-CA":
-            return "Article"
-        default:
-            return title
-        }
+    var formattedValue: String {
+        return "\(currencySymbol)\(value) (\(currency))"
     }
     
-    var itemValue : String
-    {
-        return (currencySymbol) + value + " (\(currency)) "
-    }
-    
-    func currencySymbol(for currencyCode: String) -> String? {
+    private func currencySymbol(for currencyCode: String) -> String? {
         let locale = Locale(identifier: "en_US")
         return locale.currencySymbol
     }
+    
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"
         case value, currency, title, description
     }
-    
 }
-struct Description: Codable {
+
+struct LocalizedDescription: Codable {
     let enCA: String
     let frCA: String
     
@@ -52,12 +48,20 @@ struct Description: Codable {
         case frCA = "fr-CA"
     }
     
+    var localizedTitle: String {
+        return localizedString(for: deviceLanguage, enCA, frCA)
+    }
+    
     var localizedDescription: String {
-        switch deviceLanguage {
+        return localizedString(for: deviceLanguage, enCA, frCA)
+    }
+    
+    private func localizedString(for language: String, _ english: String, _ french: String) -> String {
+        switch language {
         case "fr-CA":
-            return frCA
+            return french
         default:
-            return enCA
+            return english
         }
     }
 }

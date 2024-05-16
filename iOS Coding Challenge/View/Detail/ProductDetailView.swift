@@ -14,57 +14,42 @@ struct ProductDetailView: View {
     // MARK: - BODY
     var body: some View {
         VStack {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text("Item:")
-                        .font(.headline)
-                        .foregroundStyle(.colorGreenDark)
-                    Text(product.itemTitle)
-                        .font(.subheadline)
-                        .foregroundStyle(.colorGreenMedium)
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity)
-                
-
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text("Price:")
-                        .font(.headline)
-                        .foregroundStyle(.colorGreenDark)
-                    Text(product.itemValue)
-                        .font(.subheadline)
-                        .foregroundStyle(.colorGreenMedium)
-                    Spacer()
-
-                }
-                .frame(maxWidth: .infinity)
-
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text("Description:")
-                        .font(.headline)
-                        .foregroundColor(.colorGreenDark)
-                    
-                    Text(product.description.localizedDescription)
-                        .font(.subheadline)
-                        .foregroundStyle(.colorGreenDark)
-                        .multilineTextAlignment(.leading)
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity)
-
+            HorizontalStack {
+                Text("Item:")
+                    .itemTitleStyle()
+                Text(product.title)
+                    .itemValueStyle()
             }
-            .frame(width: UIScreen.main.bounds.width - 40)
-            .padding(10)
-            .background(Color.colorBackground.cornerRadius(12))
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.gray, lineWidth: 1)
-            )
+            
+            HorizontalStack {
+                Text("Price:")
+                    .itemTitleStyle()
+                Text(product.formattedValue)
+                    .itemValueStyle()
+                
+            }
+            
+            HorizontalStack {
+                Text("Description:")
+                    .itemTitleStyle()
+                Text(product.description.localizedDescription)
+                    .itemValueStyle()
+                    .multilineTextAlignment(.leading)
+            }
         }
-        
+        .maxWidthMinus(40)
+        .padding(Spacing.horizontalPadding)
+        .customBackground(cornerRadius: CornerRadius.medium.rawValue)
     }
 }
 
 #Preview() {
-    ProductDetailView(product: sampleProduct)
+    let sampleProduct: Product = Product(id: uuidStr,
+                                         itemID: "2acf4ac1-4000-4766-91ac-3a0ab47a811c",
+                                         value: "100.00",
+                                         currency: "CAD",
+                                         title: "Item 1",
+                                         description: LocalizedDescription(enCA: "Lorem ipsum dolor sit amet, consectetur adipiscing elit (EN).",
+                                                                           frCA: "Lorem ipsum dolor sit amet, consectetur adipiscing elit (FR)."))
+    return ProductDetailView(product: sampleProduct)
 }

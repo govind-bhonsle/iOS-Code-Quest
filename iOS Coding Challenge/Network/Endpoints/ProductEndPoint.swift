@@ -30,7 +30,7 @@ extension ProductEndPoint: Endpoint
     var header: [String : String]? {
         switch self {
         case .products:
-            return ["Content-Type": "application/json;charset=utf-8"]
+            return ["Content-Type": Constants.ContentType.applicationJsonUtf8]
         }
     }
     

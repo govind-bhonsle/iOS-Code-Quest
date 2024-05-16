@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
-
+@MainActor
 class ViewModel: ObservableObject {
     
+    // MARK: - Properties
     @Published var products: [Product] = []
     
     private let service: ProductServiceable
@@ -17,13 +18,12 @@ class ViewModel: ObservableObject {
         self.service = service
     }
     
+    // MARK: - asynchronous func fetchData(completion:)
     func fetchData(completion: @escaping (Result<Bool, RequestError>) -> Void) async {
-        let result = await self.service.getEmployees()
+        let result = await self.service.getProducts()
         switch result {
         case .success(let response):
-            DispatchQueue.main.async {   // <====
-                self.products = response.data
-            }
+            self.products = response.products
             completion(.success(true))
         case .failure(let error):
             completion(.failure(error))

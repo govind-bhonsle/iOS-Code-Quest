@@ -11,7 +11,7 @@ struct NavigationBarView: View {
     var body: some View {
         HStack {
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                Image(systemName: "magnifyingglass")
+                Image(systemName: Constants.magnifyingglass)
                     .font(.title)
                     .foregroundColor(.colorGreenLight)
             })
@@ -23,7 +23,7 @@ struct NavigationBarView: View {
             Spacer()
             Button(action: {}, label: {
                 ZStack {
-                    Image(systemName: "cart")
+                    Image(systemName: Constants.cart)
                         .font(.title)
                         .foregroundColor(.colorGreenLight)
                     

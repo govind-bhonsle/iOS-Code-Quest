@@ -5,15 +5,33 @@
 //  Created by Govind Sonu on 15/05/24.
 //
 
-import SwiftUI
 import Foundation
+
 let uuidStr = UUID().uuidString
-let sampleProduct: Product = Product(id: uuidStr,
-                                     itemID: "2acf4ac1-4000-4766-91ac-3a0ab47a811c",
-                                     value: "100.00",
-                                     currency: "CAD",
-                                     title: "Item 1",
-                                     description: Description(enCA: "Lorem ipsum dolor sit amet, consectetur adipiscing elit (EN).", 
-                                                              frCA: "Lorem ipsum dolor sit amet, consectetur adipiscing elit (FR)."))
 
 let deviceLanguage = Locale.preferredLanguages.first ?? "en-CA"
+
+enum HorizontalSpacing: CGFloat {
+    case small = 8
+    case medium = 16
+    case large = 24
+}
+
+enum Spacing {
+    static let horizontalPadding: CGFloat = 10
+}
+
+enum CornerRadius: CGFloat {
+    case small = 8
+    case medium = 12
+    case large = 16
+}
+
+struct Constants {
+    struct ContentType {
+        static let applicationJsonUtf8 = "application/json;charset=utf-8"
+    }
+    
+    static let magnifyingglass = "magnifyingglass"
+    static let cart = "cart"
+}

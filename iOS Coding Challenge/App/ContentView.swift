@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     // MARK: - BODY
-    @ObservedObject var model : ViewModel
+    @ObservedObject private var viewModel : ViewModel
     @State private var error: RequestError?
     @State private var showAlert = false
 
     // MARK: - Init
     init() {
-        self.model = ViewModel(service: ProductService())
+        self.viewModel = ViewModel(service: ProductService())
     }
     
     // MARK: - BODY
@@ -26,7 +27,7 @@ struct ContentView: View {
                     .padding(.horizontal, 15)
                     .padding(.bottom)
                     .background(.white)
-                List(model.products) { product in
+                List(viewModel.products) { product in
                     NavigationLink {
                         ProductDetailView(product: product)
                     } label: {
@@ -48,16 +49,14 @@ struct ContentView: View {
         }
         .accentColor(.colorGreenDark)
         .task {
-            await model.fetchData { result in
+            await viewModel.fetchData { result in
                 switch result
                 {
                 case .success(_):
                     showAlert = false
-                    break
                 case .failure(let error):
                     self.error = error
                     showAlert = true
-                    break
                 }
             }
         }

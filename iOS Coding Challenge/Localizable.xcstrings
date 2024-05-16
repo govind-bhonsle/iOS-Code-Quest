@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ : " : {
+
+    },
     "Description:" : {
       "localizations" : {
         "en" : {
@@ -107,29 +110,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Des produits"
-          }
-        }
-      }
-    },
-    "WELCOME" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "WELCOME"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "WELCOME"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BIENVENUE"
           }
         }
       }
